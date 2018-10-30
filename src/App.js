@@ -1,28 +1,37 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+/**
+ * Root Component
+ */
+import React from 'react';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+// Import Routes
+import routes from './routes';
+
+/**
+* @type {Object} propTypes - prop type check
+*/
+const propTypes = {
+  store: PropTypes.object.isRequired,
+};
+
+/**
+* @param {Object} props - App props
+* @param {Object} props.store - App redux store
+* @param {Object} props.routes - App routes
+*/
+const App = (props) => {
+  return (
+    <Provider store={props.store}>
+      <BrowserRouter>
+        {routes}
+      </BrowserRouter>
+    </Provider>
+  );
 }
 
-export default App;
+App.propTypes = propTypes; 
+
+export default App; 
