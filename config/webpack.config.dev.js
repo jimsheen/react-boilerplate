@@ -13,7 +13,7 @@ const getClientEnvironment = require('./env');
 const paths = require('./paths');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
-
+const postCSSConfig = require('./postcss.config');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -37,7 +37,10 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
     require.resolve('style-loader'),
     {
       loader: require.resolve('css-loader'),
-      options: cssOptions,
+      options: {
+        ...cssOptions,
+        sourceMap: true
+      }
     },
     {
       // Options for PostCSS as we reference these options twice
@@ -45,33 +48,8 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
       // package.json
       loader: require.resolve('postcss-loader'),
       options: {
-        // Necessary for external CSS imports to work
-        // https://github.com/facebook/create-react-app/issues/2677
         ident: 'postcss',
-        plugins: () => [
-          require('postcss-import'),
-          require('postcss-nested'),
-          require('postcss-extend'),
-          require('postcss-mixins'),
-          require('postcss-at-rules-variables'),
-          require('postcss-each'),
-          require('postcss-for'),
-          require('postcss-flexbugs-fixes'),
-          require('postcss-conditionals'),
-          require('postcss-math'),
-          require('postcss-hexrgba'),
-          require('postcss-plugin-px2rem')({
-            rootValue: 16,
-            unitPrecision: 4,
-            minPixelValue: 1
-          }),
-          require('postcss-preset-env')({
-            autoprefixer: {
-              flexbox: 'no-2009',
-            },
-            stage: 3,
-          }),
-        ],
+        plugins: postCSSConfig,
       },
     },
   ];
@@ -283,7 +261,7 @@ module.exports = {
             test: cssRegex,
             exclude: cssModuleRegex,
             use: getStyleLoaders({
-              importLoaders: 1,
+              importLoaders: 1
             }),
           },
           // Adds support for CSS Modules (https://github.com/css-modules/css-modules)

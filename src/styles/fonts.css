@@ -1,0 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600');
+
+:root {
+  --font-stack-base-font: 'Arial', 'sans-serif';
+  --font-base: 'Open Sans', var(--font-stack-base-font);
+  --font-base-size: 14px;
+}

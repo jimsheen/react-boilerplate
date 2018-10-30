@@ -17,6 +17,7 @@ const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent')
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
+const postCSSConfig = require('./postcss.config');
 
 
 // Webpack uses `publicPath` to determine where the app is being served from.
@@ -72,15 +73,7 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
         // Necessary for external CSS imports to work
         // https://github.com/facebook/create-react-app/issues/2677
         ident: 'postcss',
-        plugins: () => [
-          require('postcss-flexbugs-fixes'),
-          require('postcss-preset-env')({
-            autoprefixer: {
-              flexbox: 'no-2009',
-            },
-            stage: 3,
-          }),
-        ],
+        plugins: postCSSConfig,
         sourceMap: shouldUseSourceMap,
       },
     },
