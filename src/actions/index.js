@@ -4,7 +4,7 @@
 
 import { createActions } from 'redux-actions';
 
-import { homePage } from './components/pages/HomePage/HomePageActions';
+import { homePage } from './HomePageActions';
 
 const types = Object.assign({},
   homePage

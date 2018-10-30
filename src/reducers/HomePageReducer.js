@@ -4,7 +4,7 @@
 
 import { handleActions } from 'redux-actions';
 
-import { types } from '../../../actions';
+import { types } from '../actions';
 
 const homePage = handleActions(
   {

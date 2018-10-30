@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 
-import homePage from './components/pages/HomePage/HomePageReducer';
+import homePage from './HomePageReducer';
 
 
 const App = combineReducers({
