@@ -1,0 +1,15 @@
+.button {
+	border: 1px solid var(--col-outline-grey);
+	border-radius: 10px;
+	padding: 10px;
+	box-shadow: var(--drop-shadow);
+
+	&--primary {
+		background: var(--col-brand);
+		color: var(--col-white);
+
+		&:hover {
+			background: var(--col-highlight);
+		}
+	}
+}
